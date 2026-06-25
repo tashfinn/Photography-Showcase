@@ -122,30 +122,32 @@ export default function FeaturedHorizontal({ photos }: { photos: any[] }) {
                   delay: delay + 0.6 + (index * 0.1), 
                   ease: [0.21, 0.47, 0.32, 0.98] 
                 }}
-                className="relative w-[75vw] md:w-[45vw] lg:w-[35vw] h-[50vh] md:h-[65vh] shrink-0 rounded-2xl overflow-hidden group shadow-2xl cursor-pointer"
+                className="relative w-[75vw] md:w-[45vw] lg:w-[35vw] h-[50vh] md:h-[65vh] shrink-0 p-3 rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-700 ease-out group hover:border-brand-200/50 hover:bg-white/10 shadow-2xl cursor-pointer"
                 onClick={() => openLightbox(photo)}
               >
-                <motion.img 
-                  layoutId={`photo-${photo._id}-featured`}
-                  src={photo.imageUrl} 
-                  alt={photo.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 ease-out filter group-hover:contrast-125" 
-                />
-                
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex items-end p-8 md:p-12 opacity-80 group-hover:opacity-100 transition-opacity duration-500">
-                  <motion.div 
-                    initial={{ y: 20, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                  >
-                    <p className="text-brand-200 text-xs md:text-sm font-mono tracking-widest uppercase mb-3 drop-shadow-md">
-                      {photo.category?.name}
-                    </p>
-                    <h3 className="text-white text-2xl md:text-4xl font-light drop-shadow-lg tracking-wide">
-                      {photo.title}
-                    </h3>
-                  </motion.div>
+                <div className="relative w-full h-full overflow-hidden rounded-2xl">
+                  <motion.img 
+                    layoutId={`photo-${photo._id}-featured`}
+                    src={photo.imageUrl} 
+                    alt={photo.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 ease-out filter group-hover:contrast-125" 
+                  />
+                  
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex items-end p-8 md:p-12 opacity-80 group-hover:opacity-100 transition-opacity duration-500">
+                    <motion.div 
+                      initial={{ y: 20, opacity: 0 }}
+                      whileInView={{ y: 0, opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: 0.2 }}
+                    >
+                      <p className="text-brand-200 text-xs md:text-sm font-mono tracking-widest uppercase mb-3 drop-shadow-md">
+                        {photo.category?.name}
+                      </p>
+                      <h3 className="text-white text-2xl md:text-4xl font-light drop-shadow-lg tracking-wide">
+                        {photo.title}
+                      </h3>
+                    </motion.div>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -193,23 +195,25 @@ export default function FeaturedHorizontal({ photos }: { photos: any[] }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6 }}
-              className="relative w-full h-[60vh] rounded-2xl overflow-hidden shadow-2xl cursor-pointer"
+              className="relative w-full h-[60vh] p-3 rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-700 ease-out group hover:border-brand-200/50 hover:bg-white/10 shadow-2xl cursor-pointer"
               onClick={() => openLightbox(photo)}
             >
-              <motion.img 
-                layoutId={`photo-${photo._id}-featured-mobile`}
-                src={photo.imageUrl} 
-                alt={photo.title}
-                className="w-full h-full object-cover filter contrast-110" 
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex items-end p-6">
-                <div>
-                  <p className="text-brand-200 text-xs font-mono tracking-widest uppercase mb-2 drop-shadow-md">
-                    {photo.category?.name}
-                  </p>
-                  <h3 className="text-white text-xl font-medium drop-shadow-lg tracking-wide">
-                    {photo.title}
-                  </h3>
+              <div className="relative w-full h-full overflow-hidden rounded-2xl">
+                <motion.img 
+                  layoutId={`photo-${photo._id}-featured-mobile`}
+                  src={photo.imageUrl} 
+                  alt={photo.title}
+                  className="w-full h-full object-cover filter contrast-110 group-hover:scale-105 transition-transform duration-700 ease-out" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex items-end p-6">
+                  <div>
+                    <p className="text-brand-200 text-xs font-mono tracking-widest uppercase mb-2 drop-shadow-md">
+                      {photo.category?.name}
+                    </p>
+                    <h3 className="text-white text-xl font-medium drop-shadow-lg tracking-wide">
+                      {photo.title}
+                    </h3>
+                  </div>
                 </div>
               </div>
             </motion.div>

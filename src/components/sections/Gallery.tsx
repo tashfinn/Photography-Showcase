@@ -42,29 +42,31 @@ const GalleryCard = ({ photo, openLightbox }: { photo: any, openLightbox: (p: an
     >
       <motion.div 
         style={{ rotateX, scale }}
-        className="relative w-full h-full overflow-hidden rounded-xl shadow-2xl transition-shadow duration-700 ease-out group-hover:shadow-[0_0_40px_rgba(255,94,58,0.3)] z-10"
+        className="relative w-full h-full p-3 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-2xl transition-all duration-700 ease-out group-hover:border-brand-200/50 group-hover:bg-white/10 group-hover:shadow-[0_0_40px_rgba(255,94,58,0.3)] z-10"
       >
-        <motion.img
-          layoutId={`photo-${photo._id}`}
-          src={photo.imageUrl}
-          alt={photo.title}
-          className="w-full h-auto opacity-80 group-hover:opacity-100 transition-all duration-700 ease-out filter group-hover:contrast-125 group-hover:scale-105"
-        />
-        
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6 pointer-events-none">
-          <motion.div 
-            initial={{ y: 20, opacity: 0 }}
-            whileHover={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            className="w-full"
-          >
-            <p className="text-brand-200 text-xs font-mono tracking-widest uppercase mb-1 drop-shadow-md">
-              {photo.category?.name}
-            </p>
-            <h3 className="text-white text-xl font-medium tracking-wide drop-shadow-lg">
-              {photo.title}
-            </h3>
-          </motion.div>
+        <div className="relative w-full h-full overflow-hidden rounded-xl">
+          <motion.img
+            layoutId={`photo-${photo._id}`}
+            src={photo.imageUrl}
+            alt={photo.title}
+            className="w-full h-auto opacity-80 group-hover:opacity-100 transition-all duration-700 ease-out filter group-hover:contrast-125 group-hover:scale-105"
+          />
+          
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6 pointer-events-none">
+            <motion.div 
+              initial={{ y: 20, opacity: 0 }}
+              whileHover={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className="w-full"
+            >
+              <p className="text-brand-200 text-xs font-mono tracking-widest uppercase mb-1 drop-shadow-md">
+                {photo.category?.name}
+              </p>
+              <h3 className="text-white text-xl font-medium tracking-wide drop-shadow-lg">
+                {photo.title}
+              </h3>
+            </motion.div>
+          </div>
         </div>
       </motion.div>
       
