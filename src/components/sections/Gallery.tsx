@@ -38,7 +38,7 @@ const GalleryCard = ({ photo, openLightbox }: { photo: any, openLightbox: (p: an
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       onClick={() => openLightbox(photo)}
-      className="break-inside-avoid mb-8 relative rounded-xl group cursor-pointer bg-transparent"
+      className="break-inside-avoid mb-16 relative rounded-xl group cursor-pointer bg-transparent"
     >
       <motion.div 
         style={{ rotateX, scale }}
@@ -132,7 +132,7 @@ export default function Gallery({ photos }: { photos: any[] }) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.4, ease: "easeInOut" }}
-          className="columns-1 md:columns-2 lg:columns-3 gap-8 pb-32"
+          className="columns-1 md:columns-2 lg:columns-3 gap-16 pb-32"
         >
           {displayedPhotos.map((photo) => (
             <GalleryCard key={photo._id} photo={photo} openLightbox={openLightbox} />
