@@ -121,7 +121,7 @@ export default function Gallery({ photos }: { photos: any[] }) {
 
   const displayedPhotos = currentCategory 
     ? photos.filter(p => p.category?.slug === currentCategory)
-    : photos.filter(p => !p.isFeatured);
+    : photos;
 
   return (
     <div className="w-full relative">

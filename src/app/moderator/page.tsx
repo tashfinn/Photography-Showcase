@@ -7,6 +7,7 @@ import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, us
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy, rectSortingStrategy, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { motion, AnimatePresence } from "framer-motion";
+import imageCompression from 'browser-image-compression';
 
 function SortableCategory({ c, editingCatId, editCatName, setEditCatName, handleUpdateCategory, setEditingCatId, handleDeleteCategory }: any) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: c._id });
@@ -257,23 +258,37 @@ export default function ModeratorDashboard() {
     if (!uploadFile || !uploadTitle || !uploadCategory) return;
 
     setIsUploading(true);
-    const formData = new FormData();
-    formData.append("file", uploadFile);
-    formData.append("title", uploadTitle);
-    formData.append("category", uploadCategory);
+    
+    try {
+      const options = {
+        maxSizeMB: 2,
+        maxWidthOrHeight: 2560,
+        useWebWorker: true,
+      };
+      const compressedFile = await imageCompression(uploadFile, options);
 
-    const res = await fetch("/api/photos", {
-      method: "POST",
-      body: formData,
-    });
+      const formData = new FormData();
+      formData.append("file", compressedFile);
+      formData.append("title", uploadTitle);
+      formData.append("category", uploadCategory);
 
-    setIsUploading(false);
-    if (res.ok) {
-      setUploadFile(null);
-      setUploadTitle("");
-      fetchData();
-    } else {
-      alert("Failed to upload photo");
+      const res = await fetch("/api/photos", {
+        method: "POST",
+        body: formData,
+      });
+
+      setIsUploading(false);
+      if (res.ok) {
+        setUploadFile(null);
+        setUploadTitle("");
+        fetchData();
+      } else {
+        alert("Failed to upload photo");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Error compressing or uploading photo");
+      setIsUploading(false);
     }
   };
 
@@ -324,10 +339,6 @@ export default function ModeratorDashboard() {
       matchesCat = p.isFeatured === true;
     } else if (filterCategory) {
       matchesCat = p.category?._id === filterCategory;
-    } else {
-      // Default: "All Categories" view
-      // Do not show featured photos in the default "All Categories" list
-      matchesCat = p.isFeatured !== true;
     }
     
     return matchesSearch && matchesCat;
