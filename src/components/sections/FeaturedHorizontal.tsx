@@ -111,7 +111,7 @@ export default function FeaturedHorizontal({ photos }: { photos: any[] }) {
           </div>
           
           {/* Horizontal Sliding Track */}
-          <motion.div style={{ x }} className="flex gap-8 md:gap-16 px-8 relative z-10 pr-[10vw]">
+          <motion.div style={{ x }} className="flex gap-16 md:gap-32 px-8 relative z-10 pr-[10vw]">
             {featured.map((photo, index) => (
               <motion.div 
                 key={photo._id} 
@@ -185,7 +185,7 @@ export default function FeaturedHorizontal({ photos }: { photos: any[] }) {
           </div>
         </div>
 
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-24">
           {featured.map((photo) => (
             <motion.div 
               key={`mobile-${photo._id}`}
